@@ -26,7 +26,7 @@ Fout="$F-hevc.mp4"
 # crf can be tuned for better quality / smaller file size
 # The range of the CRF scale is 0–51, where 0 is lossless,
 # 23 is the default, and 51 is worst quality possible.
-ffmpeg -v quiet -stats -i "$1" -pix_fmt yuv420p -c:v libx265 -crf 22 -tag:v hvc1 -movflags frag_keyframe+empty_moov -codec:a copy "$Fout"
+ffmpeg -v quiet -stats -i "$1" -pix_fmt yuv420p -c:v libx265 -crf 22 -tag:v hvc1 -movflags frag_keyframe+empty_moov+use_metadata_tags -map_metadata 0 -codec:a copy "$Fout"
 
 # Get the new file size
 new_size=$(du -h "$F-hevc.mp4" | cut -f1)
